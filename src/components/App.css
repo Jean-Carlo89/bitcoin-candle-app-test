@@ -13,6 +13,24 @@
   }
 }
 
+.apexcharts-tooltip{    
+  
+  color:black; 
+  font-size: 34px !important;  
+  white-space: pre-wrap !important;
+    width: 300px; 
+    height: auto !important;
+}
+
+#chartContainer .apexcharts-tooltip {
+  color: red;
+}
+
+
+  /* .apexcharts-tooltip {
+    white-space: pre-wrap !important;
+    max-width: 200px;
+  } */
 .App-header {
   /* background-color: #282c34; */
   background-color: white;

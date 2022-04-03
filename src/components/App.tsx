@@ -12,6 +12,7 @@ import axios from "axios";
 import Candle from "../models/candle";
 import CandleGraph from "./CandleGraph";
 import { getInitialCandles } from "../store/modules/candleStore";
+import Header from "./Header";
 
 function App() {
   //useContext(CandleContext);
@@ -38,9 +39,11 @@ function App() {
             Edit <code>src/App.tsx</code> and save to reload.
           </p> */}
 
-        <button onClick={() => console.log(candlesArray)}>
+        {/* <button onClick={() => console.log(candlesArray)}>
           TESTattttttttttttttt
-        </button>
+        </button> */}
+
+        <Header></Header>
 
         {candlesArray.length > 0 ? (
           <CandleGraph candleArray={data ? candlesArray : []}></CandleGraph>

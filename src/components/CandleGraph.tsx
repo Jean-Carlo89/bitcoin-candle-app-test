@@ -1,98 +1,85 @@
 import React, { Props, useContext, useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { getCandles, getCandlesTest } from "../store/modules/candleStore";
-
-// import ApexAxisChartSeries from "react-apexcharts";
-// import ApexChart from "react-apexcharts";
-// import ApexXAxis from "react-apexcharts";
-// import ApexYAxis from "react-apexcharts";
-// import ApexTitleSubtitle from "react-apexcharts";
-// import ApexTooltip from "react-apexcharts";
-
-// // {
-// //   ChartComponent,
-// //
-// //   ApexChart,
-// //   ApexYAxis,
-// //   ApexXAxis,
-// //   ApexTitleSubtitle,
-// //   ApexTooltip,
-// // }
-// //import CandleContext from "../contexts/candleContext";
-
-// export type ChartOptions = {
-//   series: ApexAxisChartSeries;
-//   chart: ApexChart;
-//   xaxis: ApexXAxis;
-//   yaxis: ApexYAxis;
-//   title: ApexTitleSubtitle;
-//   tooltip: ApexTooltip;
-// };
+import "../components/App.css";
 
 export default function CandleGraph({ candleArray }) {
   const [series, setseries] = useState([]);
-  //   console.log("candleArray");
-  //   console.log(candleArray);
-  //   // return candleArray.map((c, i) => {
-  //   //   <Chart type="candlestick" height="350" width="450" series={series}>
-  //   //     {c.open}
-  //   //   </Chart>;
-  //   // });
 
-  const options2: ApexCharts.ApexOptions = {
-    // chart: {
-    //   id: "basic-bar",
-    //   type: "candlestick",
-    // },
-
+  const options: ApexCharts.ApexOptions = {
     chart: {
-      // height: 1500,
-      // type: "candlestick",
-      // width: 500,
-      //parentHeightOffset: 1500,
+      height: 350,
+      type: "candlestick",
     },
 
     xaxis: {
       type: "category",
-    },
 
-    title: {
-      text: "CandleStick Chart - Category X-axis",
-    },
-    tooltip: {
-      enabled: true,
-    },
-
-    yaxis: {
-      tooltip: {
-        enabled: true,
+      labels: {
+        style: {
+          fontSize: "30px",
+        },
       },
     },
 
-    // get series() {
-    //   const series = [
-    //     {
-    //       data: [
-    //         {
-    //           x: new Date(1538778600000),
-    //           y: [6629.81, 6650.5, 6623.04, 6633.33],
-    //         },
-    //       ],
-    //     },
-    //   ];
+    title: {
+      text: "CandleStick Chart ",
+      style: {
+        fontSize: "60px",
+      },
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+      enabled: true,
 
-    //   return series;
-    // },
+      // custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+      //   var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
 
-    // series: [
-    //   {
-    //     data: getCandles(candleArray),
-    //   },
-    // ],
+      //   return (
+      //     "<ul>" +
+      //     "<li><b>Price</b>: " +
+      //     data.x +
+      //     "</li>" +
+      //     "<li><b>Number</b>: " +
+      //     data.y[0] +
+      //     "</li>" +
+      //     // '<li><b>Product</b>: \'' + data.product + '\'</li>' +
+      //     // '<li><b>Info</b>: \'' + data.info + '\'</li>' +
+      //     // '<li><b>Site</b>: \'' + data.site + '\'</li>' +
+      //     "</ul>"
+      //   );
+      // },
+
+      x: {
+        show: true,
+      },
+      style: {
+        fontSize: "30px",
+      },
+      // items:{
+      //   display: ;
+      // }
+    },
+    labels: ["Open", "High", "Low", "Close"],
+
+    yaxis: {
+      tooltip: {
+        // enabled: true,
+        enabled: true,
+      },
+
+      labels: {
+        show: true,
+        style: {
+          fontSize: "30px",
+        },
+      },
+    },
 
     series: [
       {
-        name: "series-1",
+        name: "candles",
 
         data: getCandles(candleArray),
 
@@ -102,12 +89,24 @@ export default function CandleGraph({ candleArray }) {
   };
 
   return (
-    <Chart
-      options={options2}
-      series={options2.series}
-      width="1600"
-      height="auto"
-      type="candlestick"
-    />
+    <>
+      <Chart
+        id="ChartContainer"
+        options={options}
+        series={options.series}
+        width="1600"
+        height="900"
+        type="candlestick"
+      />
+
+      {/* <Chart
+        options={options2}
+        series={options.series}
+        width="1600"
+        height="950"
+        type="candlestick"
+      />
+      */}
+    </>
   );
 }
