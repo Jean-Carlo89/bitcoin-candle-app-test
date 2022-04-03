@@ -11,6 +11,7 @@ import axios from "axios";
 //import CandleContext from "../contexts/candleContext";
 import Candle from "../models/candle";
 import CandleGraph from "./CandleGraph";
+import { getInitialCandles } from "../store/modules/candleStore";
 
 function App() {
   //useContext(CandleContext);
@@ -21,35 +22,32 @@ function App() {
   // }
 
   const [candlesArray, setCandlesArray] = useState([]);
+  const [data, setData] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(
-        `${process.env.REACT_APP_CANDLES_API}${process.env.REACT_APP_CANDLES_API_ENDPOINT}/10`
-      )
-      .then((response) => {
-        console.log("Success");
-        console.log(response);
-        setCandlesArray(response.data);
-      })
-      .catch((e) => {
-        console.log("Error");
-        console.log(e.response);
-      });
-  }, []);
+    getInitialCandles(setCandlesArray, setData);
+  }, [data]);
 
   return (
     <>
-      {/* <CandleContext.Provider value={}> */}
-      <div className="App">
+      <div className="App-header">
+        {/* 
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <CandleGraph candleArray={candlesArray}></CandleGraph>
+          </p> */}
 
-          <a
+        <button onClick={() => console.log(candlesArray)}>
+          TESTattttttttttttttt
+        </button>
+
+        {candlesArray.length > 0 ? (
+          <CandleGraph candleArray={data ? candlesArray : []}></CandleGraph>
+        ) : null}
+      </div>
+
+      {/* <a
             className="App-link"
             href="https://reactjs.org"
             target="_blank"
@@ -58,8 +56,7 @@ function App() {
             Learn React
           </a>
         </header>
-      </div>
-      {/* </CandleContext.Provider> */}
+      </div> */}
     </>
   );
 }
